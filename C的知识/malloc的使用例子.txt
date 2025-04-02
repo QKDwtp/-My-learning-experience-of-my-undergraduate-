@@ -1,0 +1,18 @@
+malloc 函数用于分配 l 个整数大小的内存块，并且返回一个指向这块内存的指针。由于 malloc 返回的是 void* 类型的指针，所以我们需要将它强制转换为 int* 类型。
+
+注意：
+malloc 应该返回的是一个指针，而不是一个数值，所以不应该直接对 malloc 的结果进行加法操作。
+sizeof(int) 应该乘以 l 而不是乘以 malloc 的结果。
+在使用 malloc 之后，应该检查返回的指针是否为 NULL，这可以确保内存分配成功。
+
+int*arrl=(int*)malloc((l+1)*sizeof(int));
+if(arrl=NULL){
+	 // 处理内存分配失败的情况
+        fprintf(stderr, "Memory allocation failed!\n");
+        // 这里可以添加其他清理资源的代码或退出程序
+        return 1; // 返回非零值表示程序异常终止
+    }
+
+最后不要忘记
+	free（arrl）；
+来实现内存释放

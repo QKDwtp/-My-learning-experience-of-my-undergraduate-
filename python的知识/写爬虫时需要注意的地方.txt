@@ -1,0 +1,59 @@
+1.写爬虫需要一个第三方包，名为“requests”，使用时import
+2.引入一个header的参数，数据类型为字典，里面的各个键值对代表要传入的
+信息，可以将我们的爬虫访问伪装为正常的浏览器访问
+
+例子如下：
+import requests
+
+# 定义请求的 headers
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'Accept-Language': 'en-US,en;q=0.5',
+    # 可以根据需要添加其他 headers
+}
+
+# 发送请求时带上 headers
+response = requests.get('http://example.com', headers=headers)
+
+
+3.在编写网络爬虫时，headers 的作用非常重要，它可以模拟浏览器发送请求时的行为，以下是一些主要作用：
+
+用户代理（User-Agent）：
+识别爬虫的操作系统、浏览器及版本信息。
+有些网站会根据用户代理来决定是否提供服务，或者提供不同的页面版本（如移动版或桌面版）。
+防止被服务器轻易识别为爬虫，从而避免被封禁。
+避免被封禁：
+如果没有设置合适的 headers，尤其是 User-Agent，网站服务器可能会认为这是一个非正常的请求，从而拒绝服务。
+有些网站会对没有正确设置 headers 的请求进行限制或封禁。
+处理HTTP响应头：
+有些网站会检查 Referer（引用页）头部来确认请求的来源。
+Accept、Accept-Language 等头部可以告诉服务器客户端接受的内容类型和语言。
+维持会话状态：
+使用 Cookie 头部可以维持与服务器的会话状态，这对于登录后的操作尤为重要。
+在需要身份验证的网站上，正确的 Cookie 设置是必不可少的。
+绕过简单的反爬虫措施：
+有些网站的反爬虫机制比较简单，仅检查请求的 headers 是否符合正常浏览器的特征。
+设置合适的 headers 有时可以绕过这些简单的检查。
+定制请求：
+可以通过 headers 传递特定的参数，比如 Authorization 头部用于认证，If-Modified-Since 用于缓存控制等。
+
+
+4.不要用http做文件的名字，会与协议名冲突，导致失败
+
+结局如下：
+Traceback (most recent call last):
+  File "C:\Users\cn_qk\Desktop\个性化推荐系统\myenv\http.py", line 1, in <module>
+    import requests
+  File "C:\Users\cn_qk\PyCharmMiscProject\.venv\Lib\site-packages\requests\__init__.py", line 43, in <module>
+    import urllib3
+  File "C:\Users\cn_qk\PyCharmMiscProject\.venv\Lib\site-packages\urllib3\__init__.py", line 14, in <module>
+    from . import exceptions
+  File "C:\Users\cn_qk\PyCharmMiscProject\.venv\Lib\site-packages\urllib3\exceptions.py", line 7, in <module>
+    from http.client import IncompleteRead as httplib_IncompleteRead
+  File "C:\Users\cn_qk\Desktop\个性化推荐系统\myenv\http.py", line 2, in <module>
+    response = requests.get("http://books.toscrape.com/")
+               ^^^^^^^^^^^^
+AttributeError: partially initialized module 'requests' from 'C:\Users\cn_qk\PyCharmMiscProject\.venv\Lib\site-packages\requests\__init__.py' has no attribute 'get' (most likely due to a circular import)
+
+进程已结束，退出代码为 1

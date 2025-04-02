@@ -1,0 +1,7 @@
+1.printf()== <<
+2.#include<bits/stdc++.h>
+3.#include<stdio.h>== #include<iostream>
+4.开头
+#include<stdio.h>==
+#include<bits/stdc++/h>
+using spacename std;

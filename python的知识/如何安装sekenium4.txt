@@ -1,0 +1,25 @@
+如何安装sekennium4
+1. selenium4推荐方法
+由于传统的设置驱动方式过于繁琐，因此GitHub大佬SergeyPirogov写了浏览器驱动管理器，可以使设置驱动变得更加方便。
+
+首先，需要安装该管理器，使用以下命令，
+
+pip install webdriver-manager
+然后导入该包，
+
+from webdriver_manager.chrome import ChromeDriverManager
+设置service，通过ChromeDriverManager().install()来获取驱动，从而省去了下载驱动和设置驱动的步骤，
+
+service = ChromeService(executable_path=ChromeDriverManager().install())
+然后驱动加载该service，
+
+driver = webdriver.Chrome(service=service)
+此处贴出完整代码，以供参考，
+
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service as ChromeService
+from webdriver_manager.chrome import ChromeDriverManager
+service = ChromeService(executable_path=ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+driver.quit()
+2. 传统方法

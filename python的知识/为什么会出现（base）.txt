@@ -1,0 +1,72 @@
+在 PyCharm 的终端中看到 (base) (.venv) PS D:\PythonProject1\mysongs> 这样的提示信息，通常表示以下情况：
+
+1. (base) 的含义
+(base) 表示你当前激活了 Anaconda 或 Miniconda 的 base 环境。
+
+这是因为你安装了 Anaconda 或 Miniconda，并且默认情况下会激活 base 环境。
+
+2. (.venv) 的含义
+(.venv) 表示你当前激活了一个 Python 虚拟环境（可能是通过 python -m venv .venv 创建的）。
+
+这个虚拟环境的目录名是 .venv，通常位于你的项目根目录下。
+
+3. PS D:\PythonProject1\mysongs> 的含义
+PS 表示你正在使用 PowerShell 作为终端。
+
+D:\PythonProject1\mysongs> 是你当前的工作目录。
+
+为什么会同时出现 (base) 和 (.venv)？
+这种情况通常是因为你在 Anaconda 的 base 环境中，同时又激活了一个虚拟环境（.venv）。
+
+这可能会导致环境冲突，因为两个环境中的 Python 解释器和依赖包可能会互相干扰。
+
+解决方法
+如果你不希望同时激活 base 和 .venv，可以尝试以下步骤：
+
+1. 退出 base 环境
+在终端中运行以下命令，退出 Anaconda 的 base 环境：
+
+bash
+复制
+conda deactivate
+这样提示符会从 (base) (.venv) 变成 (.venv)，表示你只激活了虚拟环境。
+
+2. 直接使用虚拟环境
+如果你不需要 Anaconda 的环境，可以直接使用虚拟环境（.venv）：
+
+确保虚拟环境已激活：
+
+bash
+复制
+.venv\Scripts\activate
+如果提示符没有显示 (.venv)，可以手动检查虚拟环境是否激活：
+
+bash
+复制
+python -m venv .venv  # 如果虚拟环境未创建，先创建
+.venv\Scripts\activate
+3. 在 PyCharm 中配置解释器
+如果你希望在 PyCharm 中使用虚拟环境，可以在 PyCharm 中配置解释器：
+
+打开 PyCharm，进入 File > Settings > Project: <你的项目名> > Python Interpreter。
+
+点击右上角的齿轮图标，选择 Add Interpreter > Add Local Interpreter。
+
+选择 Virtualenv Environment，然后指定你的虚拟环境路径（例如 D:\PythonProject1\mysongs\.venv）。
+
+点击 OK，PyCharm 会使用你指定的虚拟环境。
+
+4. 禁用 Anaconda 自动激活 base 环境
+如果你不希望每次打开终端时自动激活 Anaconda 的 base 环境，可以运行以下命令：
+
+bash
+复制
+conda config --set auto_activate_base false
+这样以后打开终端时，base 环境不会自动激活。
+
+总结
+(base) 是 Anaconda 的默认环境，(.venv) 是你的项目虚拟环境。
+
+如果你不需要 Anaconda 的环境，可以退出 base 环境（conda deactivate）。
+
+确保在 PyCharm 中正确配置了虚拟环境作为解释器。
